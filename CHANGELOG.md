@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-14
+
 ### Added
 
 - Initial release: `.exclude` files in any folder keep pages out of the VitePress build (`excludeSrc`, `withExclude`), and `vitepress dev` restarts when one changes (`excludeVitePlugin`).

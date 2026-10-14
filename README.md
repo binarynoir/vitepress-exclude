@@ -152,10 +152,10 @@ For a prerelease or an explicit version, use `npm run release -- <arg>`
 [`npm version`](https://docs.npmjs.com/cli/v10/commands/npm-version) for the
 full list of accepted values.
 
-This requires an `NPM_TOKEN` repository secret (an npm
-[automation token](https://docs.npmjs.com/creating-and-viewing-access-tokens)
-with publish access) — set it under Settings → Secrets and variables →
-Actions.
+Publishing uses npm [Trusted Publishing](https://docs.npmjs.com/trusted-publishers)
+(OIDC): no npm token is stored in the repository. The package's npm settings
+trust `.github/workflows/release.yml` in this repository, so renaming that
+file breaks publishing until the setting is updated.
 
 ## License
 
