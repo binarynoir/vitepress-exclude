@@ -6,6 +6,15 @@ export interface ExcludeOptions {
    * @default [".exclude"]
    */
   excludeFilenames?: string[];
+  /**
+   * Frontmatter keys that keep a page out of the build when they are `true`,
+   * such as `["draft"]`, or `["draft", "blog.draft"]` to include
+   * `@binarynoir/vitepress-blog` drafts. Dotted keys read nested values. The
+   * same option in `@binarynoir/vitepress-auto-sidebar` and
+   * `@binarynoir/vitepress-auto-navbar` hides those pages from the menus.
+   * @default []
+   */
+  excludeFrontmatter?: string[];
   /** Log each rule file found and the globs it produced. @default false */
   verbose?: boolean;
 }

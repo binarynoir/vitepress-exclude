@@ -64,4 +64,37 @@ describe("excludeVitePlugin", () => {
       (plugin.hotUpdate as (ctx: { file: string }) => void)({ file: "/a/.exclude" }),
     ).not.toThrow();
   });
+
+  describe("excludeFrontmatter", () => {
+    const draft = "---\ndraft: true\n---\n# Draft\n";
+    const ready = "---\ntitle: Ready\n---\n# Ready\n";
+
+    it("restarts when a page becomes a draft, and when it stops being one", () => {
+      fs.writeFileSync(path.join(root, "guide/page.md"), ready);
+      const { site, hotUpdate } = setup({ excludeFrontmatter: ["draft"] });
+      const deps = () => site.configDeps.filter((dep) => dep.endsWith(".md"));
+
+      hotUpdate(`${root}/guide/page.md`);
+      expect(deps()).toEqual([]);
+
+      fs.writeFileSync(path.join(root, "guide/page.md"), draft);
+      hotUpdate(`${root}/guide/page.md`);
+      expect(deps()).toEqual([`${root}/guide/page.md`]);
+    });
+
+    it("knows the drafts that existed when it started, and restarts when one is published", () => {
+      fs.writeFileSync(path.join(root, "guide/page.md"), draft);
+      const { site, hotUpdate } = setup({ excludeFrontmatter: ["draft"] });
+      fs.writeFileSync(path.join(root, "guide/page.md"), ready);
+      hotUpdate(`${root}/guide/page.md`);
+      expect(site.configDeps).toContain(`${root}/guide/page.md`);
+    });
+
+    it("leaves pages alone without the option", () => {
+      fs.writeFileSync(path.join(root, "guide/page.md"), draft);
+      const { site, hotUpdate } = setup();
+      hotUpdate(`${root}/guide/page.md`);
+      expect(site.configDeps.filter((dep) => dep.endsWith(".md"))).toEqual([]);
+    });
+  });
 });

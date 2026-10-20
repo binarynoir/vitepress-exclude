@@ -93,5 +93,8 @@
   "allowScripts": {
     "esbuild@0.27.7": true,
     "fsevents@2.3.3": true
+  },
+  "dependencies": {
+    "yaml": "^2.9.1"
   }
 }

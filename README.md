@@ -113,16 +113,56 @@ Rules that cannot be turned into `srcExclude` globs are skipped with a warning:
 Folders whose names start with `.` (such as `.vitepress`) and `node_modules`
 are not searched for `.exclude` files. VitePress never builds pages from them.
 
+## Drafts in frontmatter
+
+A `.exclude` file lists what to leave out from the folder. A page can also say
+it for itself, in its frontmatter. List the keys with `excludeFrontmatter`, and
+any page that sets one of them to `true` is left out of the build:
+
+```ts
+withExclude(defineConfig({/* ... */}), docsRoot, {
+  excludeFrontmatter: ["draft"],
+});
+```
+
+```md
+---
+title: Pricing changes
+draft: true
+---
+```
+
+- **Only `true` counts.** `draft: false`, `draft: "yes"` or no `draft` at all
+  leave the page in.
+- **Dotted keys read nested values.** `["draft", "blog.draft"]` also leaves
+  out [`@binarynoir/vitepress-blog`](https://binarynoir.tech/plugins/blog/)
+  posts marked `blog: { draft: true }`. The blog then lists only what was built,
+  so a draft is never in a list or feed either.
+- **The menus follow.** [Auto Sidebar](https://binarynoir.tech/plugins/auto-sidebar/)
+  and [Auto Navbar](https://binarynoir.tech/plugins/auto-navbar) take the same
+  `excludeFrontmatter` option and hide the same pages, just as they read the
+  same `.exclude` files.
+- **Preview drafts in `vitepress dev`** by turning it on for builds only. VitePress
+  sets `NODE_ENV` to `production` before it loads the config for a build:
+
+  ```ts
+  const excludeFrontmatter = process.env.NODE_ENV === "production" ? ["draft"] : [];
+  ```
+
+- **In `vitepress dev`, a page that gains or loses `draft: true` restarts the
+  server**, as an edited `.exclude` file does, so the change applies right away.
+
 ## Options
 
 Both `withExclude(config, srcDir, options)` and `excludeSrc(srcDir, options)` take:
 
-| Option             | Default        | Description                                                |
-| ------------------ | -------------- | ---------------------------------------------------------- |
-| `excludeFilenames` | `[".exclude"]` | Filenames read in each folder.                             |
-| `verbose`          | `false`        | Log each `.exclude` file, its rules and the globs it made. |
+| Option               | Default        | Description                                                                                                                                 |
+| -------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `excludeFilenames`   | `[".exclude"]` | Filenames read in each folder.                                                                                                              |
+| `excludeFrontmatter` | `[]`           | Frontmatter keys that leave a page out when `true`, such as `["draft", "blog.draft"]`. See [Drafts in frontmatter](#drafts-in-frontmatter). |
+| `verbose`            | `false`        | Log each `.exclude` file, its rules and the globs it made.                                                                                  |
 
-`excludeVitePlugin(options)` takes `excludeFilenames`. Pass it the same list.
+`excludeVitePlugin(options)` takes `excludeFilenames` and `excludeFrontmatter`. Pass it the same lists.
 
 ## How it works
 

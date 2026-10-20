@@ -1,9 +1,12 @@
 import path from "node:path";
-import { findExcludeRules, rulesToGlobs } from "./rules.js";
+import { findFrontmatterExcludedPages } from "./frontmatter.js";
+import { escapeGlob, findExcludeRules, rulesToGlobs } from "./rules.js";
 import type { ExcludeOptions } from "./types.js";
 
 /**
- * `srcExclude` globs for the rules in every `.exclude` file under `srcDir`.
+ * `srcExclude` globs for the rules in every `.exclude` file under `srcDir`,
+ * and for every page whose frontmatter sets one of `excludeFrontmatter` to
+ * `true`.
  *
  * ```ts
  * // .vitepress/config.mts
@@ -15,7 +18,8 @@ import type { ExcludeOptions } from "./types.js";
 export function excludeSrc(srcDir: string, options: ExcludeOptions = {}): string[] {
   const root = path.resolve(srcDir);
   const rules = findExcludeRules(root, options);
-  const globs = rulesToGlobs(rules);
+  const pages = findFrontmatterExcludedPages(root, options);
+  const globs = [...new Set([...rulesToGlobs(rules), ...pages.map(escapeGlob)])];
 
   if (options.verbose) {
     const files = new Set(rules.map((rule) => rule.file));
@@ -27,6 +31,10 @@ export function excludeSrc(srcDir: string, options: ExcludeOptions = {}): string
       for (const rule of rules.filter((r) => r.file === file)) {
         console.log(`    ${rule.pattern}`);
       }
+    }
+    if (pages.length) {
+      console.log(`[vitepress-exclude] ${pages.length} page(s) excluded by frontmatter`);
+      for (const page of pages) console.log(`  ${page}`);
     }
     for (const glob of globs) console.log(`  srcExclude: ${glob}`);
   }

@@ -5,7 +5,7 @@ import type { ExcludeOptions, ExcludeRule } from "./types.js";
 export const DEFAULT_EXCLUDE_FILENAMES = [".exclude"];
 
 /** Folders that never hold pages and are not worth walking. */
-const SKIPPED_FOLDERS = new Set(["node_modules", "dist"]);
+export const SKIPPED_FOLDERS = new Set(["node_modules", "dist"]);
 
 export function normalizeExcludeFilenames(filenames: ExcludeOptions["excludeFilenames"]): string[] {
   const list = (filenames ?? DEFAULT_EXCLUDE_FILENAMES).filter(Boolean);
@@ -123,7 +123,7 @@ function warn(rule: ExcludeRule, reason: string): void {
 }
 
 /** Escapes every glob character, for a literal folder path. */
-function escapeGlob(text: string): string {
+export function escapeGlob(text: string): string {
   return text.replace(/[*?[\]{}()!+@\\]/g, "\\$&");
 }
 
