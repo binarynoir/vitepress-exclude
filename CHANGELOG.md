@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-20
+
 ### Added
 
 - `excludeFrontmatter` option: frontmatter keys that leave a page out of the build when they are `true`, such as `["draft"]`, with dotted keys for nested values (`blog.draft`). In `vitepress dev`, a page that gains or loses the flag restarts the server
