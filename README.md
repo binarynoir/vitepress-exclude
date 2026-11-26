@@ -7,11 +7,11 @@
 A [VitePress](https://vitepress.dev) plugin that keeps pages out of the build
 with a `.exclude` file in the folder that holds them.
 
-[Documentation and live demo](https://binarynoir.tech/plugins/exclude/)
+[Documentation and live demo](https://binarynoir.com/plugins/exclude/)
 
 [![Support me on Buy Me a Coffee](https://img.shields.io/badge/Support%20me-Buy%20Me%20a%20Coffee-orange?style=for-the-badge&logo=buy-me-a-coffee)](https://buymeacoffee.com/binarynoir)
 [![Support me on Ko-fi](https://img.shields.io/badge/Support%20me-Ko--fi-blue?style=for-the-badge&logo=ko-fi)](https://ko-fi.com/binarynoir)
-[![More tools](https://img.shields.io/badge/Website-binarynoir.tech-8c8c8c?style=for-the-badge)](https://binarynoir.tech)
+[![More tools](https://img.shields.io/badge/Website-binarynoir.com-8c8c8c?style=for-the-badge)](https://binarynoir.com)
 
 ## What this does
 
@@ -135,11 +135,11 @@ draft: true
 - **Only `true` counts.** `draft: false`, `draft: "yes"` or no `draft` at all
   leave the page in.
 - **Dotted keys read nested values.** `["draft", "blog.draft"]` also leaves
-  out [`@binarynoir/vitepress-blog`](https://binarynoir.tech/plugins/blog/)
+  out [`@binarynoir/vitepress-blog`](https://binarynoir.com/plugins/blog/)
   posts marked `blog: { draft: true }`. The blog then lists only what was built,
   so a draft is never in a list or feed either.
-- **The menus follow.** [Auto Sidebar](https://binarynoir.tech/plugins/auto-sidebar/)
-  and [Auto Navbar](https://binarynoir.tech/plugins/auto-navbar) take the same
+- **The menus follow.** [Auto Sidebar](https://binarynoir.com/plugins/auto-sidebar/)
+  and [Auto Navbar](https://binarynoir.com/plugins/auto-navbar) take the same
   `excludeFrontmatter` option and hide the same pages, just as they read the
   same `.exclude` files.
 - **Preview drafts in `vitepress dev`** by turning it on for builds only. VitePress
@@ -220,8 +220,8 @@ Pull requests are welcome too.
 ## More from BinaryNoir
 
 <p align="center">
-  <a href="https://binarynoir.tech">
-    <img alt="BinaryNoir" src="https://binarynoir.tech/logo-horizontal.png" width="320">
+  <a href="https://binarynoir.com">
+    <img alt="BinaryNoir" src="https://binarynoir.com/logo-horizontal.png" width="320">
   </a>
 </p>
 
@@ -229,15 +229,15 @@ Exclude is one of a family of open-source tools from BinaryNoir.
 
 **Pairs well with Exclude**
 
-- [Broken Links](https://binarynoir.tech/plugins/broken-links): dead links shown as text, not build errors
-- [Downloads](https://binarynoir.tech/plugins/downloads): downloadable files next to your pages
+- [Broken Links](https://binarynoir.com/plugins/broken-links): dead links shown as text, not build errors
+- [Downloads](https://binarynoir.com/plugins/downloads): downloadable files next to your pages
 
-**New:** [Blog for Vite](https://binarynoir.tech/plugins/vite-blog): a Markdown blog for a plain Vite site, with search, feeds and a strict CSP
+**New:** [Blog for Vite](https://binarynoir.com/plugins/vite-blog): a Markdown blog for a plain Vite site, with search, feeds and a strict CSP
 
-**See them all:** VitePress plugins, Vite plugins, editor extensions and command-line tools, with documentation and live demos, at **[binarynoir.tech](https://binarynoir.tech)**.
+**See them all:** VitePress plugins, Vite plugins, editor extensions and command-line tools, with documentation and live demos, at **[binarynoir.com](https://binarynoir.com)**.
 
 <!-- binarynoir:more:end -->
 
 ## Author
 
-John Smith III, [BinaryNoir](https://binarynoir.tech). Thanks to all contributors and users for their support and feedback.
+John Smith III, [BinaryNoir](https://binarynoir.com). Thanks to all contributors and users for their support and feedback.
